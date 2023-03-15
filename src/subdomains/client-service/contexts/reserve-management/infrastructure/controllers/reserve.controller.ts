@@ -71,7 +71,7 @@ export class ReserveController {
     @Post('/addCustomer')
     async addCustomer(@Body() command: AddCustomerCommand) {
         const useCase = new AddCustomerUseCase(
-            this.customerService,
+            this.reserveService,
             this.customerAddedMessagePublisher,
         );
         return await useCase.execute(command);

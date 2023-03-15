@@ -23,6 +23,17 @@ import {
     RoomKeyRepository,
     RoomRepository
 } from './repositories';
+import {
+    CheckInMySqlService,
+    CheckOutMySqlService,
+    ConsumptionMySqlService,
+    CustomerMySqlService,
+    GuestMySqlService,
+    InvoiceMySqlService,
+    ReserveMySqlService,
+    RoomMySqlService,
+    RoomKeyMySqlService
+} from './services';
 
 @Module({
     imports: [
@@ -44,15 +55,15 @@ import {
         ])
     ],
     providers: [
-        CheckInMySqlEntity,
-        CheckOutMySqlEntity,
-        ConsumptionMySqlEntity,
-        CustomerMySqlEntity,
-        GuestMySqlEntity,
-        InvoiceMySqlEntity,
-        ReserveMySqlEntity,
-        RoomMySqlEntity,
-        RoomKeyMySqlEntity,
+        CheckInMySqlService,
+        CheckOutMySqlService,
+        ConsumptionMySqlService,
+        CustomerMySqlService,
+        GuestMySqlService,
+        InvoiceMySqlService,
+        ReserveMySqlService,
+        RoomMySqlService,
+        RoomKeyMySqlService,
 
         CheckInRepository,
         CheckOutRepository,
@@ -66,15 +77,15 @@ import {
 
     ],
     exports: [
-        CheckInMySqlEntity,
-        CheckOutMySqlEntity,
-        ConsumptionMySqlEntity,
-        CustomerMySqlEntity,
-        GuestMySqlEntity,
-        InvoiceMySqlEntity,
-        ReserveMySqlEntity,
-        RoomMySqlEntity,
-        RoomKeyMySqlEntity,
+        CheckInMySqlService,
+        CheckOutMySqlService,
+        ConsumptionMySqlService,
+        CustomerMySqlService,
+        GuestMySqlService,
+        InvoiceMySqlService,
+        ReserveMySqlService,
+        RoomMySqlService,
+        RoomKeyMySqlService,
 
         CheckInRepository,
         CheckOutRepository,

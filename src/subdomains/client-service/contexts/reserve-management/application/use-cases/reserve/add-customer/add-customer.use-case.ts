@@ -11,7 +11,7 @@ import {
     IAddCustomer,
     ICustomerAddedResponse,
     ICustomerDomainEntity,
-    ICustomerDomainService,
+    IReserveDomainService,
     PaymentMethodValueObject,
     ReserveAggregate
 } from "../../../../domain";
@@ -24,12 +24,12 @@ export class AddCustomerUseCase<
     private readonly reserveAggregate: ReserveAggregate;
 
     constructor(
-        private readonly customerService: ICustomerDomainService,
+        private readonly reserveService: IReserveDomainService,
         private readonly customerAddedEventPublisher: CustomerAddedEventPublisher
     ) {
         super();
         this.reserveAggregate = new ReserveAggregate({
-            customerService,
+            reserveService,
             customerAddedEventPublisher
         })
     }
