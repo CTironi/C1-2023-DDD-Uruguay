@@ -52,29 +52,23 @@ export class CreateReserveUseCase<
 
     private createValueObject(command: Command): IReserveDomainEntity {
         const numberOfGuests = new NumberOfGuestsValueObject(command.numberOfGuests);
-        const startDate = new DateValueObject(command.startDate);
 
         return {
             numberOfGuests,
-            startDate
         }
     }
 
     private validateValueObject(valueObject: IReserveDomainEntity): void {
         const {
             numberOfGuests,
-            startDate
         } = valueObject
 
         if (numberOfGuests instanceof NumberOfGuestsValueObject && numberOfGuests.hasErrors())
             this.setErrors(numberOfGuests.getErrors());
 
-        if (startDate instanceof DateValueObject && startDate.hasErrors())
-            this.setErrors(startDate.getErrors());
-
         if (this.hasErrors() === true)
             throw new ValueObjectException(
-                'Hay algunos errores en el comando ejecutado por AddRoomUseCase',
+                'Hay algunos errores en el comando ejecutado por CreateReserveUseCase',
                 this.getErrors(),
             );
     }
@@ -82,7 +76,6 @@ export class CreateReserveUseCase<
     private async createEntityReserveDomain(valueObject: IReserveDomainEntity, command: Command): Promise<ReserveDomainEntity> {
         const {
             numberOfGuests,
-            startDate
         } = valueObject
 
         const responseCustomer = this.getCustomerUseCase.execute({customerId: command.customerId})
@@ -91,7 +84,6 @@ export class CreateReserveUseCase<
 
         return new ReserveDomainEntity({
             numberOfGuests: numberOfGuests.valueOf(),
-            startDate: startDate,
             customer: (await responseCustomer).data ,
             room: (await responseRoom).data,
         })

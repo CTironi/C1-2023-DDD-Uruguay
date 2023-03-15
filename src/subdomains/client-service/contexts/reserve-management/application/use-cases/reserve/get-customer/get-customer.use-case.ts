@@ -5,7 +5,7 @@ import {
 import {
     CustomerDomainEntity,
     CustomerObtainedEventPublisher,
-    ICustomerDomainService,
+    IReserveDomainService,
     ICustomerObtainedResponse,
     IGetCustomer,
     ReserveAggregate
@@ -23,12 +23,12 @@ export class GetCustomerUseCase<
     private readonly reserveAggregate: ReserveAggregate;
 
     constructor(
-        private readonly customerService: ICustomerDomainService,
+        private readonly reserveService: IReserveDomainService,
         private readonly customerObtainedEventPublisher: CustomerObtainedEventPublisher,
     ) {
         super();
         this.reserveAggregate = new ReserveAggregate({
-            customerService,
+            reserveService,
             customerObtainedEventPublisher,
         })
     }

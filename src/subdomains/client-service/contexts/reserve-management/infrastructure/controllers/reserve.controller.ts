@@ -80,7 +80,7 @@ export class ReserveController {
     @Post('/addRoom')
     async addRoom(@Body() command: AddRoomCommand) {
         const useCase = new AddRoomUseCase(
-            this.roomService,
+            this.reserveService,
             this.roomAddedMessagePublisher,
         );
         return await useCase.execute(command);
@@ -143,7 +143,7 @@ export class ReserveController {
     @Get('/getCustomer')
     async getCustomer(@Body() command: GetCustomerCommand) {
         const useCase = new GetCustomerUseCase(
-            this.customerService,
+            this.reserveService,
             this.customerObatinedMessagePublisher,
         );
         return await useCase.execute(command);

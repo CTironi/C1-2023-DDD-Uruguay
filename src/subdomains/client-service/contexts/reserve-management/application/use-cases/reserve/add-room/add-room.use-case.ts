@@ -8,7 +8,7 @@ import {
     IAddRoom,
     IRoomAddedResponse,
     IRoomDomainEntity,
-    IRoomDomainService,
+    IReserveDomainService,
     LocationValueObject,
     ReserveAggregate,
     RoomAddedEventPublisher,
@@ -26,12 +26,12 @@ export class AddRoomUseCase<
     private readonly reserveAggregate: ReserveAggregate;
 
     constructor(
-        private readonly roomService: IRoomDomainService,
+        private readonly reserveService: IReserveDomainService,
         private readonly roomAddedEventPublisher: RoomAddedEventPublisher
     ) {
         super();
         this.reserveAggregate = new ReserveAggregate({
-            roomService,
+            reserveService,
             roomAddedEventPublisher
         })
     }
