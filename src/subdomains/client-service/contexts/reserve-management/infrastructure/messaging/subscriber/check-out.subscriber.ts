@@ -1,8 +1,13 @@
 import { Controller } from "@nestjs/common";
 import { Ctx, EventPattern, KafkaContext, Payload } from "@nestjs/microservices";
+import { EventMySqlEntity, EventService } from "../../persistence";
 
 @Controller()
 export class CheckOutControllerSuscriber{
+
+    constructor(
+        private readonly eventService: EventService
+    ) { }
 
     /**
      * EventPattern se utiliza para definir un patrón de evento de Kafka
@@ -24,6 +29,14 @@ export class CheckOutControllerSuscriber{
     @EventPattern('reserve-management.check-out-creted')
     checkOutCreated(@Payload() data: any, @Ctx() context: KafkaContext){
 
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.check-out-creted';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
+
         console.log('--------------------------------------')
         console.log('Data: ', data)
         console.log('--------------------------------------')
@@ -33,6 +46,14 @@ export class CheckOutControllerSuscriber{
 
     @EventPattern('reserve-management.consumption-added')
     consumptionAdded(@Payload() data: any, @Ctx() context: KafkaContext){
+
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.consumption-added';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -44,6 +65,14 @@ export class CheckOutControllerSuscriber{
     @EventPattern('reserve-management.consuption-obtained')
     consumptionObtained(@Payload() data: any, @Ctx() context: KafkaContext){
 
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.consuption-obtained';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
+
         console.log('--------------------------------------')
         console.log('Data: ', data)
         console.log('--------------------------------------')
@@ -53,6 +82,14 @@ export class CheckOutControllerSuscriber{
 
     @EventPattern('reserve-management.invoice-added')
     invoiceAdded(@Payload() data: any, @Ctx() context: KafkaContext){
+
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.invoice-added';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -64,6 +101,14 @@ export class CheckOutControllerSuscriber{
     @EventPattern('reserve-management.invoice-obtained')
     invoiceObtained(@Payload() data: any, @Ctx() context: KafkaContext){
 
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.invoice-obtained';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
+
         console.log('--------------------------------------')
         console.log('Data: ', data)
         console.log('--------------------------------------')
@@ -73,6 +118,14 @@ export class CheckOutControllerSuscriber{
 
     @EventPattern('reserve-management.extra-updated')
     extraUpdated(@Payload() data: any, @Ctx() context: KafkaContext){
+
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.extra-updated';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -84,6 +137,14 @@ export class CheckOutControllerSuscriber{
     @EventPattern('reserve-management.mini-bat-updated')
     miniBarUpdated(@Payload() data: any, @Ctx() context: KafkaContext){
 
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management..mini-bat-updated';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
+
         console.log('--------------------------------------')
         console.log('Data: ', data)
         console.log('--------------------------------------')
@@ -93,6 +154,14 @@ export class CheckOutControllerSuscriber{
 
     @EventPattern('reserve-management.cost-updated')
     costUpdated(@Payload() data: any, @Ctx() context: KafkaContext){
+
+                
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.cost-updated';
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
