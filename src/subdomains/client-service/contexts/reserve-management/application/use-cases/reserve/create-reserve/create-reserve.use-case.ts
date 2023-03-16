@@ -37,7 +37,8 @@ export class CreateReserveUseCase<
         this.reserveAggregate = new ReserveAggregate({
             reserveService,
             reserveCreatedEventPublisher,
-            customerObtainedEventPublisher
+            customerObtainedEventPublisher,
+            roomObtainedEventPublisher
         })
     }
 
@@ -85,8 +86,6 @@ export class CreateReserveUseCase<
     private async createEntityReserveDomain(valueObject: IReserveDomainEntity, command: Command): Promise<ReserveDomainEntity> {
         const {
             numberOfGuests,
-            startDate,
-            endDate
         } = valueObject
 
         const getCustomer = new GetCustomerUseCase(this.reserveService, this.customerObtainedEventPublisher)

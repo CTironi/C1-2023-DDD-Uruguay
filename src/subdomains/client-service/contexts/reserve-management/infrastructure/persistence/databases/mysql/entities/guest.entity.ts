@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 import { GuestDomainEntity } from '../../../../../domain/entities';
 import { CheckInMySqlEntity } from "./";
@@ -20,6 +20,6 @@ export class GuestMySqlEntity extends GuestDomainEntity {
     @Column()
     email: string;
 
-    @OneToOne( ()=> CheckInMySqlEntity, (checkIn)=> checkIn.guest )
+    @OneToMany( ()=> CheckInMySqlEntity, (checkIn)=> checkIn.guest )
     checkIn: CheckInMySqlEntity;
 }

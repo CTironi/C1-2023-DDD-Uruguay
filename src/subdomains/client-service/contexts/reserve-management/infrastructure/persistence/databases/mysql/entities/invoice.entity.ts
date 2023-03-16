@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 import { InvoiceDomainEntity } from '../../../../../domain/entities';
 import { CheckOutMySqlEntity } from "./";
@@ -14,6 +14,6 @@ export class InvoiceMySqlEntity extends InvoiceDomainEntity {
     @Column()
     cost: number;
 
-    @OneToOne( ()=> CheckOutMySqlEntity, (checkOut)=> checkOut.invoice )
+    @OneToMany( ()=> CheckOutMySqlEntity, (checkOut)=> checkOut.invoice )
     checkOut: CheckOutMySqlEntity;
 }

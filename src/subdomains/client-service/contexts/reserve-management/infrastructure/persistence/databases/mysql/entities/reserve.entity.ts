@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from "typeorm"
 
 import { ReserveDomainEntity } from '../../../../../domain/entities/';
 import { CustomerMySqlEntity, RoomMySqlEntity } from './';
@@ -18,7 +18,7 @@ export class ReserveMySqlEntity extends ReserveDomainEntity {
     @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     endDate: Date;
 
-    @OneToOne(() => CustomerMySqlEntity, (customer) => customer.reserve,
+    @ManyToOne(() => CustomerMySqlEntity, (customer) => customer.reserve,
         {
             cascade: ['insert', 'update'],
         },
@@ -27,7 +27,7 @@ export class ReserveMySqlEntity extends ReserveDomainEntity {
     customer: CustomerMySqlEntity;
 
 
-    @OneToOne(() => RoomMySqlEntity, (room) => room.reserve,
+    @ManyToOne(() => RoomMySqlEntity, (room) => room.reserve,
         {
             cascade: ['insert', 'update'],
         },

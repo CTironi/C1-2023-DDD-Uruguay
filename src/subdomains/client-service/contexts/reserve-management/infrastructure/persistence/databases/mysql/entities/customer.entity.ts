@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 import { CustomerDomainEntity } from '../../../../../domain/entities';
 import { ReserveMySqlEntity } from "./reserve.entity";
@@ -17,6 +17,6 @@ export class CustomerMySqlEntity extends CustomerDomainEntity {
     @Column()
     paymentMethod: string;
 
-    @OneToOne( ()=> ReserveMySqlEntity, (reserve)=> reserve.customer )
+    @OneToMany( ()=> ReserveMySqlEntity, (reserve)=> reserve.customer )
     reserve: ReserveMySqlEntity;
 }

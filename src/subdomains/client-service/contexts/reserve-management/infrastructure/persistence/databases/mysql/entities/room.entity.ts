@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 import { RoomDomainEntity } from '../../../../../domain/entities/';
 import { ReserveMySqlEntity } from './';
@@ -24,6 +24,6 @@ export class RoomMySqlEntity extends RoomDomainEntity {
     @Column()
     roomNumber: number;
 
-    @OneToOne( ()=> ReserveMySqlEntity, (reserve)=> reserve.room)
+    @OneToMany( ()=> ReserveMySqlEntity, (reserve)=> reserve.room)
     reserve: ReserveMySqlEntity
 }

@@ -8,6 +8,7 @@ import {
     IReserveDomainEntity,
     IReserveDomainService,
     IUpdateNumberOfGuests,
+    IdValueObject,
     NumberOfGuestsUpdatedEventPublisher,
     NumberOfGuestsValueObject,
     ReserveAggregate,
@@ -48,9 +49,11 @@ export class UpdateNumbreOfGuestUseCase<
 
     private createValueObject(command: Command): IReserveDomainEntity {
         const numberOfGuests = new NumberOfGuestsValueObject(command.numberOfGuests);
+        const reserveId = new IdValueObject(command.reserveId);
 
         return {
             numberOfGuests,
+            reserveId
         }
     }
 

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from "typeorm"
 
 import { CheckOutDomainEntity } from '../../../../../domain/entities';
 import { InvoiceMySqlEntity, ConsumptionMySqlEntity } from '.';
@@ -15,7 +15,7 @@ export class CheckOutMySqlEntity extends CheckOutDomainEntity {
     @Column()
     recepsionistName: string;
 
-    @OneToOne(() => InvoiceMySqlEntity, (invoice) => invoice.checkOut,
+    @ManyToOne(() => InvoiceMySqlEntity, (invoice) => invoice.checkOut,
         {
             cascade: ['insert', 'update'],
         },
@@ -23,8 +23,7 @@ export class CheckOutMySqlEntity extends CheckOutDomainEntity {
     @JoinColumn()
     invoice: InvoiceMySqlEntity;
 
-
-    @OneToOne(() => ConsumptionMySqlEntity, (consumption) => consumption.checkOut,
+    @ManyToOne(() => ConsumptionMySqlEntity, (consumption) => consumption.checkOut,
         {
             cascade: ['insert', 'update'],
         },

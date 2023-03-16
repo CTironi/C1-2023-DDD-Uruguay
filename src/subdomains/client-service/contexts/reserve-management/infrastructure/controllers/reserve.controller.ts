@@ -97,7 +97,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
-    @Put('/updateStartDate')
+    @Post('/updateStartDate')
     async updateStartDate(@Body() command: UpdateStartDateCommand) {
         const useCase = new UpdateStartDateUseCase(
             this.reserveService,
@@ -106,7 +106,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
-    @Put('/updateEndDate')
+    @Post('/updateEndDate')
     async updateEndDate(@Body() command: UpdateEndDateCommand) {
         const useCase = new UpdateEndDateUseCase(
             this.reserveService,
@@ -115,7 +115,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
-    @Put('/updateNumberOfGuests')
+    @Post('/updateNumberOfGuests')
     async updateNumberOfGuests(@Body() command: UpdateNumberOfGuestsCommand) {
         const useCase = new UpdateNumbreOfGuestUseCase(
             this.reserveService,
@@ -133,10 +133,10 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
-    @Put('/updateState')
+    @Post('/updateState')
     async updateState(@Body() command: UpdateStateCommand) {
         const useCase = new UpdateStateUseCase(
-            this.reserveService,
+            this.roomService,
             this.stateUpdatedMessagePublisher,
         );
         return await useCase.execute(command);

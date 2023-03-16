@@ -4,10 +4,11 @@ import {
     ValueObjectException
 } from "src/libs/sofka";
 import {
-    IReserveDomainService,
+    IRoomDomainService,
     IRoomDomainEntity,
     IStateUpdatedResponse,
     IUpdateState,
+    IdValueObject,
     ReserveAggregate,
     RoomDomainEntity,
     StateUpdatedEventPublisher,
@@ -22,12 +23,12 @@ export class UpdateStateUseCase<
     private readonly reserveAggregate: ReserveAggregate;
 
     constructor(
-        private readonly reserveService: IReserveDomainService,
+        private readonly roomService: IRoomDomainService,
         private readonly stateUpdatedEventPublisher: StateUpdatedEventPublisher
     ) {
         super();
         this.reserveAggregate = new ReserveAggregate({
-            reserveService,
+            roomService,
             stateUpdatedEventPublisher
         })
     }
@@ -48,9 +49,11 @@ export class UpdateStateUseCase<
 
     private createValueObject(command: Command): IRoomDomainEntity {
         const state = new StateValueObject(command.state);
+        const roomId = new IdValueObject(command.roomId);
 
         return {
             state,
+            roomId
         }
     }
 

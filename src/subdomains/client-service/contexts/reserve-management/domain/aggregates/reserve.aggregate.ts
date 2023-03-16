@@ -13,19 +13,19 @@ import {
     RoomObtainedEventPublisher
 } from "../events";
 import { AggregateRootException } from "src/libs/sofka";
-import { 
-    IAddRoom, 
-    ICreateReserve, 
-    IUpdateEndDate, 
-    IUpdateNumberOfGuests, 
-    IUpdatePaymentMethod, 
-    IUpdateStartDate, 
-    IUpdateState 
+import {
+    IAddRoom,
+    ICreateReserve,
+    IUpdateEndDate,
+    IUpdateNumberOfGuests,
+    IUpdatePaymentMethod,
+    IUpdateStartDate,
+    IUpdateState
 } from "../interfaces";
-import { 
-    CreateReserve, 
+import {
+    CreateReserve,
     AddRoom,
-    AddCustomer, 
+    AddCustomer,
     UpdateStartDate,
     UpdateEndDate,
     UpdateNumberOfGuests,
@@ -109,6 +109,10 @@ export class ReserveAggregate implements
             throw new AggregateRootException('reserveService no esta definido')
         if (!this.reserveCreatedEventPublisher)
             throw new AggregateRootException('reserveCreatedEventPublisher no esta definido')
+        if (!this.customerObtainedEventPublisher)
+            throw new AggregateRootException('customerObtainedEventPublisher no esta definido')
+        if (!this.roomObtainedEventPublisher)
+            throw new AggregateRootException('roomObtainedEventPublisher no esta definido')
 
         return await CreateReserve(reserve, this.reserveService, this.reserveCreatedEventPublisher, this.customerObtainedEventPublisher, this.roomObtainedEventPublisher)
     }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 import { ConsumptionDomainEntity } from '../../../../../domain/entities';
 import { CheckOutMySqlEntity } from ".";
@@ -20,6 +20,6 @@ export class ConsumptionMySqlEntity extends ConsumptionDomainEntity {
     @Column()
     extra: number;
 
-    @OneToOne( ()=> CheckOutMySqlEntity, (checkOut)=> checkOut.consumption )
+    @OneToMany( ()=> CheckOutMySqlEntity, (checkOut)=> checkOut.consumption )
     checkOut: CheckOutMySqlEntity;
 }

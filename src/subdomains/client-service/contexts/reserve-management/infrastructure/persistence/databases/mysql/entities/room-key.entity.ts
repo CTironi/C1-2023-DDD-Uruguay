@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 import { RoomKeyDomainEntity } from '../../../../../domain/entities';
 import { CheckInMySqlEntity } from '.';
@@ -15,6 +15,6 @@ export class RoomKeyMySqlEntity extends RoomKeyDomainEntity {
     @Column()
     accessLevel: string;
 
-    @OneToOne( ()=> CheckInMySqlEntity, (checkIn)=> checkIn.roomKey)
+    @OneToMany( ()=> CheckInMySqlEntity, (checkIn)=> checkIn.roomKey)
     checkIn: CheckInMySqlEntity
 }

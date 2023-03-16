@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from "typeorm"
 
 import { CheckInDomainEntity } from '../../../../../domain/entities';
 import { GuestMySqlEntity, RoomKeyMySqlEntity } from '.';
@@ -16,7 +16,7 @@ export class CheckInMySqlEntity extends CheckInDomainEntity {
     @Column()
     startDate: Date;
 
-    @OneToOne(() => GuestMySqlEntity, (guest) => guest.checkIn,
+    @ManyToOne(() => GuestMySqlEntity, (guest) => guest.checkIn,
         {
             cascade: ['insert', 'update'],
         },
@@ -25,7 +25,7 @@ export class CheckInMySqlEntity extends CheckInDomainEntity {
     guest: GuestMySqlEntity;
 
 
-    @OneToOne(() => RoomKeyMySqlEntity, (roomKey) => roomKey.checkIn,
+    @ManyToOne(() => RoomKeyMySqlEntity, (roomKey) => roomKey.checkIn,
         {
             cascade: ['insert', 'update'],
         },
