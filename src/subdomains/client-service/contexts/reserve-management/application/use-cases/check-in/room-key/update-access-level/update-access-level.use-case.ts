@@ -11,6 +11,7 @@ import {
     IRoomKeyDomainEntity,
     IRoomKeyDomainService,
     IUpdateAccessLevel,
+    IdValueObject,
     RoomKeyDomainEntity
 } from "../../../../../domain";
 
@@ -48,9 +49,11 @@ export class UpdateAccessLevelUseCase<
 
     private createValueObject(command: Command): IRoomKeyDomainEntity {
         const accessLevel = new AccessLevelValueObject(command.accessLevel);
-
+        const roomKeyId = new IdValueObject(command.roomKeyId)
+        
         return {
             accessLevel,
+            roomKeyId
         }
     }
 

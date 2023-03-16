@@ -101,7 +101,7 @@ export class CheckInController {
     @Post('/updateEmail')
     async updateEmail(@Body() command: UpdateEmailCommand) {
         const useCase = new UpdateEmailUseCase(
-            this.checkInService,
+            this.guestService,
             this.emailUpdatedMessagePublisher,
         );
         return await useCase.execute(command);

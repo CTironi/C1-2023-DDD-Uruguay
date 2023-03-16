@@ -1,11 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 import {
-    CheckInControllerSuscriber,
-    CheckOutControllerSuscriber,
-    ReserveControllerSuscriber
-} from "./subscriber";
-import {
     ReserveCreatedMessagePublisher,
     CustomerAddedMessagePublisher,
     RoomAddedMessagePublisher,
@@ -69,10 +64,7 @@ import {
             },
         ]),
     ],
-    controllers: [
-        CheckInControllerSuscriber,
-        CheckOutControllerSuscriber,
-    ],
+    controllers: [],
     providers: [
         ReserveCreatedMessagePublisher,
         CustomerAddedMessagePublisher,

@@ -1,9 +1,12 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('event')
 export class EventMySqlEntity {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('uuid')
+    eventId: string;
+
+    @Column()
     type: string;
 
     @Column({ length: 1000 })

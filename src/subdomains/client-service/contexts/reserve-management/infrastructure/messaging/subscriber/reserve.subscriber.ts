@@ -31,11 +31,10 @@ export class ReserveControllerSuscriber {
     @EventPattern('reserve-management.customer-added')
     customerAdded(@Payload() data: any, @Ctx() context: KafkaContext) {
 
-
         const event = new EventMySqlEntity();
         event.data = JSON.stringify(data);
         event.type = 'reserve-management.customer-added';
-            event.createdAt = Date();
+        event.createdAt = Date();
 
         this.eventService.registerEvent(event);
 

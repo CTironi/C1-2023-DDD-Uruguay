@@ -1,19 +1,30 @@
 import { Module } from "@nestjs/common";
 import { PersistenceModule } from './persistence/persistence.module';
-import { CheckInController, CheckOutController, ReserveController } from "./controllers";
+import {
+    CheckInController,
+    CheckOutController,
+    ReserveController
+} from "./controllers";
 import { MessagingModule } from "./messaging/messaging.module";
-import { ReserveControllerSuscriber } from "./messaging";
+import {
+    CheckInControllerSuscriber,
+    CheckOutControllerSuscriber,
+    ReserveControllerSuscriber
+} from "./messaging";
 
 @Module({
-    imports:[PersistenceModule, MessagingModule],
-    controllers:[
+    imports: [PersistenceModule, MessagingModule],
+    controllers: [
         CheckInController,
         CheckOutController,
         ReserveController,
 
-        ReserveControllerSuscriber
+        ReserveControllerSuscriber,
+        CheckInControllerSuscriber,
+        CheckOutControllerSuscriber,
+
     ],
-    providers:[],
-    exports:[]
+    providers: [],
+    exports: []
 })
-export class ReserveManagementModule{}
+export class ReserveManagementModule { }

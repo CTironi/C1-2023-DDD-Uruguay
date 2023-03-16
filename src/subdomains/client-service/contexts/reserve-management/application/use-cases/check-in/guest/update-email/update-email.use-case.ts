@@ -8,10 +8,11 @@ import {
     EmailUpdatedEventPublisher,
     EmailValueObject,
     GuestDomainEntity,
-    ICheckInDomainService,
+    IGuestDomainService,
     IEmailUpdatedResponse,
     IGuestDomainEntity,
-    IUpdateEmail
+    IUpdateEmail,
+    IdValueObject
 } from "../../../../../domain";
 
 export class UpdateEmailUseCase<
@@ -22,12 +23,12 @@ export class UpdateEmailUseCase<
     private readonly checkInAggregate: CheckInAggregate;
 
     constructor(
-        private readonly checkInService: ICheckInDomainService,
+        private readonly guestService: IGuestDomainService,
         private readonly emailUpdatedEventPublisher: EmailUpdatedEventPublisher
     ) {
         super();
         this.checkInAggregate = new CheckInAggregate({
-            checkInService,
+            guestService,
             emailUpdatedEventPublisher
         })
     }
@@ -48,9 +49,11 @@ export class UpdateEmailUseCase<
 
     private createValueObject(command: Command): IGuestDomainEntity {
         const email = new EmailValueObject(command.email);
+        const guestId = new IdValueObject(command.guestId)
 
         return {
             email,
+            guestId,
         }
     }
 
