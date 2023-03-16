@@ -72,7 +72,6 @@ import {
     controllers: [
         CheckInControllerSuscriber,
         CheckOutControllerSuscriber,
-        ReserveControllerSuscriber
     ],
     providers: [
         ReserveCreatedMessagePublisher,

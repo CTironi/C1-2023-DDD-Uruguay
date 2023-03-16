@@ -1,14 +1,14 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity('event')
 export class EventMySqlEntity {
 
-    @Column()
+    @PrimaryColumn()
     type: string;
 
     @Column()
     data: string;
 
     @Column()
-    createdAt: number;
+    createdAt: string;
 }

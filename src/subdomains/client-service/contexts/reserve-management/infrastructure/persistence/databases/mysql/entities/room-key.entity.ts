@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { RoomKeyDomainEntity } from '../../../../../domain/entities';
 import { CheckInMySqlEntity } from '.';
 
-@Entity()
+@Entity('room-key')
 export class RoomKeyMySqlEntity extends RoomKeyDomainEntity {
 
     @PrimaryGeneratedColumn('uuid')

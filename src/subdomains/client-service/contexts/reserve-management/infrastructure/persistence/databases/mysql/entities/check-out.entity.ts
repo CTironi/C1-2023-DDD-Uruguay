@@ -4,7 +4,7 @@ import { CheckOutDomainEntity } from '../../../../../domain/entities';
 import { InvoiceMySqlEntity, ConsumptionMySqlEntity } from '.';
 
 
-@Entity()
+@Entity('check-out')
 export class CheckOutMySqlEntity extends CheckOutDomainEntity {
     @PrimaryGeneratedColumn('uuid')
     checkOutId: string;

@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { GuestDomainEntity } from '../../../../../domain/entities';
 import { CheckInMySqlEntity } from "./";
 
-@Entity()
+@Entity('guest')
 export class GuestMySqlEntity extends GuestDomainEntity {
     @PrimaryGeneratedColumn('uuid')
     guestId: string;

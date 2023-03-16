@@ -1,8 +1,15 @@
 import { Controller } from "@nestjs/common";
 import { Ctx, EventPattern, KafkaContext, Payload } from "@nestjs/microservices";
+import { EventMySqlEntity, EventService } from "../../persistence";
 
 @Controller()
 export class ReserveControllerSuscriber{
+
+    constructor(
+        private readonly eventService: EventService
+    ){}
+
+    
 
     /**
      * EventPattern se utiliza para definir un patrón de evento de Kafka
@@ -23,6 +30,14 @@ export class ReserveControllerSuscriber{
      */
     @EventPattern('reserve-management.customer-added')
     customerAdded(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        
+        const event = new EventMySqlEntity();
+        event.data = JSON.stringify(data);
+        event.type = 'reserve-management.customer-added',
+        event.createdAt = Date();
+
+        this.eventService.registerEvent(event);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)

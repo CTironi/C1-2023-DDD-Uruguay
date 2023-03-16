@@ -110,7 +110,7 @@ export class ReserveAggregate implements
         if (!this.reserveCreatedEventPublisher)
             throw new AggregateRootException('reserveCreatedEventPublisher no esta definido')
 
-        return await CreateReserve(reserve, this.reserveService, this.reserveCreatedEventPublisher)
+        return await CreateReserve(reserve, this.reserveService, this.reserveCreatedEventPublisher, this.customerObtainedEventPublisher, this.roomObtainedEventPublisher)
     }
 
     async addRoom(room: IAddRoom): Promise<RoomDomainEntity> {

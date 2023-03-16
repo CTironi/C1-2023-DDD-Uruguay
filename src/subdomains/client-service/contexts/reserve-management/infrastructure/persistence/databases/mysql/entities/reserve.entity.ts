@@ -12,10 +12,10 @@ export class ReserveMySqlEntity extends ReserveDomainEntity {
     @Column()
     numberOfGuests: number;
 
-    @Column()
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     startDate: Date;
     
-    @Column()
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     endDate: Date;
 
     @OneToOne(() => CustomerMySqlEntity, (customer) => customer.reserve,

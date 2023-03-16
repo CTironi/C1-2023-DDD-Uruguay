@@ -7,8 +7,9 @@ import {
     CustomerDomainEntity,
     ICustomerDomainEntity,
     IPaymentMethonUpdatedResponse,
-    IReserveDomainService,
+    ICustomerDomainService,
     IUpdatePaymentMethod,
+    IdValueObject,
     PaymentMethodUpdatedEventPublisher,
     PaymentMethodValueObject,
     ReserveAggregate
@@ -22,12 +23,12 @@ export class UpdatePaymentMethodUseCase<
     private readonly reserveAggregate: ReserveAggregate;
 
     constructor(
-        private readonly reserveService: IReserveDomainService,
+        private readonly customerService: ICustomerDomainService,
         private readonly paymentMethodUpdatedEventPublisher: PaymentMethodUpdatedEventPublisher
     ) {
         super();
         this.reserveAggregate = new ReserveAggregate({
-            reserveService,
+            customerService,
             paymentMethodUpdatedEventPublisher
         })
     }
@@ -48,9 +49,11 @@ export class UpdatePaymentMethodUseCase<
 
     private createValueObject(command: Command): ICustomerDomainEntity {
         const paymentMethod = new PaymentMethodValueObject(command.paymentMethod);
+        const customerId = new IdValueObject(command.customerId)
 
         return {
             paymentMethod,
+            customerId,
         }
     }
 

@@ -4,7 +4,7 @@ import { CheckInDomainEntity } from '../../../../../domain/entities';
 import { GuestMySqlEntity, RoomKeyMySqlEntity } from '.';
 
 
-@Entity()
+@Entity('check-in')
 export class CheckInMySqlEntity extends CheckInDomainEntity {
     
     @PrimaryGeneratedColumn('uuid')

@@ -91,6 +91,8 @@ export class ReserveController {
         const useCase = new CreateReserveUseCase(
             this.reserveService,
             this.reserveCreatedMessagePublisher,
+            this.customerObatinedMessagePublisher,
+            this.roomObtainedMessagePublisher,
         );
         return await useCase.execute(command);
     }
@@ -122,10 +124,10 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
-    @Put('/updatePaymentMethod')
+    @Post('/updatePaymentMethod')
     async updatePaymentMethod(@Body() command: UpdatePaymentMethodCommand) {
         const useCase = new UpdatePaymentMethodUseCase(
-            this.reserveService,
+            this.customerService,
             this.paymentMethodUpdatedMessagePublisher,
         );
         return await useCase.execute(command);
@@ -152,7 +154,7 @@ export class ReserveController {
     @Get('/getRoom')
     async getRoom(@Body() command: GetRoomCommand) {
         const useCase = new GetRoomUseCase(
-            this.roomService,
+            this.reserveService,
             this.roomObtainedMessagePublisher,
         );
         return await useCase.execute(command);

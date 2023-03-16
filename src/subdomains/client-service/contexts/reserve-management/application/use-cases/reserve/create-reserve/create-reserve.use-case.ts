@@ -4,6 +4,7 @@ import {
     ValueObjectException
 } from "src/libs/sofka";
 import {
+    CustomerObtainedEventPublisher,
     DateValueObject,
     ICreateReserve,
     IReserveCreatedResponse,
@@ -12,7 +13,8 @@ import {
     NumberOfGuestsValueObject,
     ReserveAggregate,
     ReserveCreatedEventPublisher,
-    ReserveDomainEntity
+    ReserveDomainEntity,
+    RoomObtainedEventPublisher
 } from "../../../../domain";
 import { GetCustomerUseCase, GetRoomUseCase } from "..";
 
@@ -28,11 +30,14 @@ export class CreateReserveUseCase<
     constructor(
         private readonly reserveService: IReserveDomainService,
         private readonly reserveCreatedEventPublisher: ReserveCreatedEventPublisher,
+        private readonly customerObtainedEventPublisher: CustomerObtainedEventPublisher,
+        private readonly roomObtainedEventPublisher: RoomObtainedEventPublisher,
     ) {
         super();
         this.reserveAggregate = new ReserveAggregate({
             reserveService,
-            reserveCreatedEventPublisher
+            reserveCreatedEventPublisher,
+            customerObtainedEventPublisher
         })
     }
 
@@ -52,9 +57,13 @@ export class CreateReserveUseCase<
 
     private createValueObject(command: Command): IReserveDomainEntity {
         const numberOfGuests = new NumberOfGuestsValueObject(command.numberOfGuests);
+        const startDate = new DateValueObject(command.startDate);
+        const endDate = new DateValueObject(command.endDate);
 
         return {
             numberOfGuests,
+            startDate,
+            endDate
         }
     }
 
@@ -76,14 +85,22 @@ export class CreateReserveUseCase<
     private async createEntityReserveDomain(valueObject: IReserveDomainEntity, command: Command): Promise<ReserveDomainEntity> {
         const {
             numberOfGuests,
+            startDate,
+            endDate
         } = valueObject
 
-        const responseCustomer = this.getCustomerUseCase.execute({customerId: command.customerId})
+        const getCustomer = new GetCustomerUseCase(this.reserveService, this.customerObtainedEventPublisher)
 
-        const responseRoom = this.getRoomUseCase.execute({roomId: command.roomId})
+        const getRoom = new GetRoomUseCase(this.reserveService, this.roomObtainedEventPublisher)
+
+        const responseCustomer = getCustomer.execute({customerId: command.customerId})
+
+        const responseRoom = getRoom.execute({roomId: command.roomId})
 
         return new ReserveDomainEntity({
             numberOfGuests: numberOfGuests.valueOf(),
+            startDate: new Date,
+            endDate: new Date,
             customer: (await responseCustomer).data ,
             room: (await responseRoom).data,
         })

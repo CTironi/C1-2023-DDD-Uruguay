@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { InvoiceDomainEntity } from '../../../../../domain/entities';
 import { CheckOutMySqlEntity } from "./";
 
-@Entity()
+@Entity('invoice')
 export class InvoiceMySqlEntity extends InvoiceDomainEntity {
     @PrimaryGeneratedColumn('uuid')
     invoiceId: string;

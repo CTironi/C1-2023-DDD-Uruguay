@@ -5,6 +5,7 @@ import {
     CheckOutService,
     ConsumptionService,
     CustomerService,
+    EventService,
     GuestService,
     InvoiceService,
     ReserveService,
@@ -25,6 +26,7 @@ import {
         ReserveService,
         RoomKeyService,
         RoomService,
+        EventService
     ],
     exports: [
         CheckInService,
@@ -36,6 +38,7 @@ import {
         ReserveService,
         RoomKeyService,
         RoomService,
+        EventService
     ]
 })
 export class PersistenceModule { }

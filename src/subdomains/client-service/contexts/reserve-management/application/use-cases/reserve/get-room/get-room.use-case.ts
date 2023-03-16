@@ -4,7 +4,7 @@ import {
 } from "src/libs/sofka";
 import {
     IGetRoom,
-    IRoomDomainService,
+    IReserveDomainService,
     IRoomObtainedResponse,
     ReserveAggregate,
     RoomDomainEntity,
@@ -22,12 +22,12 @@ export class GetRoomUseCase<
     private readonly reserveAggregate: ReserveAggregate;
 
     constructor(
-        private readonly roomService: IRoomDomainService,
+        private readonly reserveService: IReserveDomainService,
         private readonly roomObtainedEventPublisher: RoomObtainedEventPublisher,
     ) {
         super();
         this.reserveAggregate = new ReserveAggregate({
-            roomService,
+            reserveService,
             roomObtainedEventPublisher,
         })
     }

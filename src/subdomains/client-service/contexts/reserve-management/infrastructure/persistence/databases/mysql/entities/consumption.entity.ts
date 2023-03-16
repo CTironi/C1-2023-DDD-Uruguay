@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { ConsumptionDomainEntity } from '../../../../../domain/entities';
 import { CheckOutMySqlEntity } from ".";
 
-@Entity()
+@Entity('consumption')
 export class ConsumptionMySqlEntity extends ConsumptionDomainEntity {
     @PrimaryGeneratedColumn('uuid')
     consumptionId: string;

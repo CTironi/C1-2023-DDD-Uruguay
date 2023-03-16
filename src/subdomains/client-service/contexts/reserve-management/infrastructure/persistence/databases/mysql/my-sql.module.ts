@@ -6,6 +6,7 @@ import {
     CheckOutMySqlEntity,
     ConsumptionMySqlEntity,
     CustomerMySqlEntity,
+    EventMySqlEntity,
     GuestMySqlEntity,
     InvoiceMySqlEntity,
     ReserveMySqlEntity,
@@ -17,6 +18,7 @@ import {
     CheckOutRepository,
     ConsumptionRepository,
     CustomerRepository,
+    EventRepository,
     GuestRepository,
     InvoiceRepository,
     ReserveRepository,
@@ -32,8 +34,10 @@ import {
     InvoiceMySqlService,
     ReserveMySqlService,
     RoomMySqlService,
-    RoomKeyMySqlService
+    RoomKeyMySqlService,
+    EventMySqlService
 } from './services';
+
 
 @Module({
     imports: [
@@ -50,7 +54,8 @@ import {
             InvoiceMySqlEntity,
             ReserveMySqlEntity,
             RoomMySqlEntity,
-            RoomKeyMySqlEntity
+            RoomKeyMySqlEntity,
+            EventMySqlEntity
 
         ])
     ],
@@ -64,6 +69,7 @@ import {
         ReserveMySqlService,
         RoomMySqlService,
         RoomKeyMySqlService,
+        EventMySqlService,
 
         CheckInRepository,
         CheckOutRepository,
@@ -74,6 +80,7 @@ import {
         ReserveRepository,
         RoomKeyRepository,
         RoomRepository,
+        EventRepository,
 
     ],
     exports: [
@@ -86,6 +93,7 @@ import {
         ReserveMySqlService,
         RoomMySqlService,
         RoomKeyMySqlService,
+        EventMySqlService,
 
         CheckInRepository,
         CheckOutRepository,
@@ -96,6 +104,7 @@ import {
         ReserveRepository,
         RoomKeyRepository,
         RoomRepository,
+        EventRepository,
     ]
 })
 export class MySqlModule { }

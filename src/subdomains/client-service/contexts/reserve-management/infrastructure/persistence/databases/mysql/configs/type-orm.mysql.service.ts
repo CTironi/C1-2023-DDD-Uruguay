@@ -10,7 +10,8 @@ import {
     InvoiceMySqlEntity,
     ReserveMySqlEntity,
     RoomMySqlEntity,
-    RoomKeyMySqlEntity
+    RoomKeyMySqlEntity,
+    EventMySqlEntity
 } from "../entities";
 
 @Injectable()
@@ -35,7 +36,8 @@ export class TypeOrmMySqlConfigService implements TypeOrmOptionsFactory {
                 InvoiceMySqlEntity,
                 ReserveMySqlEntity,
                 RoomMySqlEntity,
-                RoomKeyMySqlEntity
+                RoomKeyMySqlEntity,
+                EventMySqlEntity
             ],
             synchronize: true,
             logging: true,
