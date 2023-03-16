@@ -5,7 +5,7 @@ import {
 import {
     GuestDomainEntity,
     GuestObtainedEventPublisher,
-    IGuestDomainService,
+    ICheckInDomainService,
     IGuestObtainedResponse,
     IGetGuest,
     CheckInAggregate
@@ -23,12 +23,12 @@ export class GetGuestUseCase<
     private readonly checkInAggregate: CheckInAggregate;
 
     constructor(
-        private readonly guestService: IGuestDomainService,
+        private readonly checkInService: ICheckInDomainService,
         private readonly guestObtainedEventPublisher: GuestObtainedEventPublisher,
     ) {
         super();
         this.checkInAggregate = new CheckInAggregate({
-            guestService,
+            checkInService,
             guestObtainedEventPublisher,
         })
     }

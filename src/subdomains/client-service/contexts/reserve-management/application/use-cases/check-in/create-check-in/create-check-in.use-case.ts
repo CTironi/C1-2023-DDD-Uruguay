@@ -33,11 +33,15 @@ export class CreateCheckInUseCase<
     constructor(
         private readonly checkInService: ICheckInDomainService,
         private readonly checkInCreatedEventPublisher: CheckInCreatedEventPublisher,
+        private readonly guestObtainedEventPublisher: GuestObtainedEventPublisher,
+        private readonly roomKeyObtainedEventPublisher: RoomKeyObtainedEventPublisher,
     ) {
         super();
         this.checkInAggregate = new CheckInAggregate({
             checkInService,
-            checkInCreatedEventPublisher
+            checkInCreatedEventPublisher,
+            guestObtainedEventPublisher,
+            roomKeyObtainedEventPublisher
         })
     }
 
@@ -68,14 +72,10 @@ export class CreateCheckInUseCase<
     private validateValueObject(valueObject: ICheckInDomainEntity): void {
         const {
             recepsionistName,
-            startDate
         } = valueObject
 
         if (recepsionistName instanceof FullNameValueObject && recepsionistName.hasErrors())
             this.setErrors(recepsionistName.getErrors());
-
-        if (startDate instanceof DateValueObject && startDate.hasErrors())
-            this.setErrors(startDate.getErrors());
 
         if (this.hasErrors() === true)
             throw new ValueObjectException(
@@ -90,13 +90,17 @@ export class CreateCheckInUseCase<
             startDate
         } = valueObject
 
-        const responseGuest = this.getGuestUseCase.execute({ guestId: command.guestId })
+        const getGuest = new GetGuestUseCase(this.checkInService, this.guestObtainedEventPublisher)
 
-        const responseRoomKey = this.getRoomKeyUseCase.execute({ roomKeyId: command.roomKeyId })
+        const getRoomKey = new GetRoomKeyUseCase(this.checkInService, this.roomKeyObtainedEventPublisher)
+
+        const responseGuest = getGuest.execute({ guestId: command.guestId })
+
+        const responseRoomKey = getRoomKey.execute({ roomKeyId: command.roomKeyId })
 
         return new CheckInDomainEntity({
             recepsionistName: recepsionistName.valueOf(),
-            startDate: startDate,
+            startDate: new Date,
             guest: (await responseGuest).data,
             roomKey: (await responseRoomKey).data,
         })

@@ -4,7 +4,7 @@ import {
 } from "src/libs/sofka";
 import {
     IGetRoomKey,
-    IRoomKeyDomainService,
+    ICheckInDomainService,
     IRoomKeyObtainedResponse,
     CheckInAggregate,
     RoomKeyDomainEntity,
@@ -22,12 +22,12 @@ export class GetRoomKeyUseCase<
     private readonly checkInAggregate: CheckInAggregate;
 
     constructor(
-        private readonly roomKeyService: IRoomKeyDomainService,
+        private readonly checkInService: ICheckInDomainService,
         private readonly roomKeyObtainedEventPublisher: RoomKeyObtainedEventPublisher,
     ) {
         super();
         this.checkInAggregate = new CheckInAggregate({
-            roomKeyService,
+            checkInService,
             roomKeyObtainedEventPublisher,
         })
     }

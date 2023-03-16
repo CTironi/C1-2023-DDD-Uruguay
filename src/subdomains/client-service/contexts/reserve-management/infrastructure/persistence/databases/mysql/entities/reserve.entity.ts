@@ -4,7 +4,7 @@ import { ReserveDomainEntity } from '../../../../../domain/entities/';
 import { CustomerMySqlEntity, RoomMySqlEntity } from './';
 
 
-@Entity()
+@Entity('reserve')
 export class ReserveMySqlEntity extends ReserveDomainEntity {
     @PrimaryGeneratedColumn('uuid')
     reserveId: string;

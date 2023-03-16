@@ -83,20 +83,22 @@ export class CheckInController {
         const useCase = new CreateCheckInUseCase(
             this.checkInService,
             this.checkInCreatedMessagePublisher,
+            this.guestObatinedMessagePublisher,
+            this.roomKeyObtainedMessagePublisher
         );
         return await useCase.execute(command);
     }
 
-    @Put('/updatePhone')
+    @Post('/updatePhone')
     async updatePhone(@Body() command: UpdatePhoneCommand) {
         const useCase = new UpdatePhoneUseCase(
-            this.checkInService,
+            this.guestService,
             this.phoneUpdatedMessagePublisher,
         );
         return await useCase.execute(command);
     }
 
-    @Put('/updateEmail')
+    @Post('/updateEmail')
     async updateEmail(@Body() command: UpdateEmailCommand) {
         const useCase = new UpdateEmailUseCase(
             this.checkInService,
@@ -105,7 +107,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
-    @Put('/updateAccessLevel')
+    @Post('/updateAccessLevel')
     async updateAccessLevel(@Body() command: UpdateAccessLevelCommand) {
         const useCase = new UpdateAccessLevelUseCase(
             this.roomKeyService,
@@ -117,7 +119,7 @@ export class CheckInController {
     @Get('/getGuest')
     async getGuest(@Body() command: GetGuestCommand) {
         const useCase = new GetGuestUseCase(
-            this.guestService,
+            this.checkInService,
             this.guestObatinedMessagePublisher,
         );
         return await useCase.execute(command);
@@ -126,7 +128,7 @@ export class CheckInController {
     @Get('/getRoomKey')
     async getRoomKey(@Body() command: GetRoomKeyCommand) {
         const useCase = new GetRoomKeyUseCase(
-            this.roomKeyService,
+            this.checkInService,
             this.roomKeyObtainedMessagePublisher,
         );
         return await useCase.execute(command);
