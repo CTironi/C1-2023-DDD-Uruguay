@@ -1,4 +1,4 @@
-import { EventPublisherBase } from "src/libs/sofka";
+import { EventPublisherBase } from "./../../../../../../../../libs/sofka";
 import { ReserveDomainEntity } from "../../../entities";
 
 export abstract class EndDateUpdatedEventPublisher<

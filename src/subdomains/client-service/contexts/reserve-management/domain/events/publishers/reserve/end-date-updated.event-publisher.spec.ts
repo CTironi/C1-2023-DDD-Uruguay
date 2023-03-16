@@ -1,10 +1,10 @@
-import { IEventPublisher } from "src/libs/sofka";
-import { NumberOfGuestsUpdatedEventPublisher } from "./number-of-guest-updated.event-publisher";
+import { IEventPublisher } from "./../../../../../../../../libs/sofka";
+import { EndDateUpdatedEventPublisher } from "./end-date-updated.event-publisher";
 import { ReserveDomainEntity } from "../../../entities";
 
-class EventPublisher extends NumberOfGuestsUpdatedEventPublisher { }
+class EventPublisher extends EndDateUpdatedEventPublisher { }
 
-describe('NumberOfGuestsUpdatedEventPublisher', () => {
+describe('EndDateUpdatedEventPublisher', () => {
     let eventPublisher: EventPublisher;
     let publisher: IEventPublisher;
 
@@ -19,7 +19,7 @@ describe('NumberOfGuestsUpdatedEventPublisher', () => {
 
     it('should emit event', () => {
         // Arrange
-        const topic = 'reserve-management.number-of-guests-updated';
+        const topic = 'reserve-management.end-date-updated';
         const response = new ReserveDomainEntity();
         const data = JSON.stringify({ data: response });
         eventPublisher.response = response;

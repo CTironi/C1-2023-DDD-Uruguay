@@ -1,4 +1,4 @@
-import { EventPublisherBase } from "src/libs/sofka";
+import { EventPublisherBase } from "../../../../../../../../libs/sofka";
 import { CustomerDomainEntity } from "../../../entities";
 
 export abstract class CustomerAddedEventPublisher<
