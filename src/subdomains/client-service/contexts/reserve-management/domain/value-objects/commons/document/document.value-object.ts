@@ -1,5 +1,5 @@
-import { ValueObjectBase } from 'src/libs/sofka/';
-import { IsValidDocument, IsValidNumber } from 'src/libs/validations/';
+import { ValueObjectBase } from '../../../../../../../../libs/sofka';
+import { IsValidDocument, IsValidNumber } from '../../../../../../../../libs/validations/';
 
 export class DocumentValueObject extends ValueObjectBase<number> {
 
@@ -40,7 +40,7 @@ export class DocumentValueObject extends ValueObjectBase<number> {
         if(this.value && IsValidDocument(this.value) === false) {
             const error = {
                 field: 'Document',
-                message: `${this.value} , no es un documento valido`
+                message: "No es un documento valido"
             };
             this.setError(error);
         }

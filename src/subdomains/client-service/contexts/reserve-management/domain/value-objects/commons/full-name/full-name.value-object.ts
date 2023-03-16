@@ -1,5 +1,6 @@
-import { ValueObjectBase } from 'src/libs/sofka/';
-import { IsValidFullName, IsValidString } from 'src/libs/validations/';
+
+import { ValueObjectBase } from '../../../../../../../../libs/sofka';
+import { IsValidFullName, IsValidString } from '../../../../../../../../libs/validations/';
 export class FullNameValueObject extends ValueObjectBase<string>{
 
     constructor(value?: string) {
@@ -66,7 +67,7 @@ export class FullNameValueObject extends ValueObjectBase<string>{
         if (this.value && IsValidFullName(this.value) === false) {
             const error = {
                 field: 'FullName',
-                message: `El nombre: ${this.value} , no es valido`
+                message: 'No es un nombre valido'
             };
             this.setError(error);
         }

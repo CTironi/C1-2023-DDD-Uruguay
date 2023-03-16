@@ -1,5 +1,5 @@
-import { ValueObjectBase } from 'src/libs/sofka/';
-import { IsValidNumber } from 'src/libs/validations';
+import { ValueObjectBase } from '../../../../../../../../libs/sofka/';
+import { IsValidNumber } from '../../../../../../../../libs/validations';
 
 export class RoomNumberValueObject extends ValueObjectBase<number>{
 

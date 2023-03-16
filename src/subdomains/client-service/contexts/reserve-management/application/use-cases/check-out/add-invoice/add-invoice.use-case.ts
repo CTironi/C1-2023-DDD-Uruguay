@@ -53,21 +53,16 @@ export class AddInvoiceUseCase<
 
         return {
             cost,
-            date,
         }
     }
 
     private validateValueObject(valueObject: IInvoiceDomainEntity): void {
         const {
             cost,
-            date,
         } = valueObject
 
         if (cost instanceof CostValueObject && cost.hasErrors())
             this.setErrors(cost.getErrors());
-
-        if (date instanceof DateValueObject && date.hasErrors())
-            this.setErrors(date.getErrors());
 
         if (this.hasErrors() === true)
             throw new ValueObjectException(
@@ -79,12 +74,11 @@ export class AddInvoiceUseCase<
     private createEntityInvoiceDomain(valueObject: IInvoiceDomainEntity): InvoiceDomainEntity {
         const {
             cost,
-            date,
         } = valueObject
 
         return new InvoiceDomainEntity({
             cost: cost.valueOf(),
-            date: date,
+            date: new Date,
         })
     }
 
