@@ -6,7 +6,7 @@ export class EventMySqlEntity {
     @PrimaryColumn()
     type: string;
 
-    @Column()
+    @Column({ length: 1000 })
     data: string;
 
     @Column()
