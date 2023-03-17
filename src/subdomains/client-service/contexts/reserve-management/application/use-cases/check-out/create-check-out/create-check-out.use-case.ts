@@ -33,11 +33,15 @@ export class CreateCheckOutUseCase<
     constructor(
         private readonly checkOutService: ICheckOutDomainService,
         private readonly checkOutCreatedEventPublisher: CheckOutCreatedEventPublisher,
+        private readonly invoiceObtainedEventPublisher: InvoiceObtainedEventPublisher,
+        private readonly consumptionObtainedEventPublisher: ConsumptionObtainedEventPublisher,
     ) {
         super();
         this.checkOutAggregate = new CheckOutAggregate({
             checkOutService,
-            checkOutCreatedEventPublisher
+            checkOutCreatedEventPublisher,
+            invoiceObtainedEventPublisher,
+            consumptionObtainedEventPublisher
         })
     }
 
@@ -68,14 +72,10 @@ export class CreateCheckOutUseCase<
     private validateValueObject(valueObject: ICheckOutDomainEntity): void {
         const {
             recepsionistName,
-            endDate
         } = valueObject
 
         if (recepsionistName instanceof FullNameValueObject && recepsionistName.hasErrors())
             this.setErrors(recepsionistName.getErrors());
-
-        if (endDate instanceof DateValueObject && endDate.hasErrors())
-            this.setErrors(endDate.getErrors());
 
         if (this.hasErrors() === true)
             throw new ValueObjectException(
@@ -90,13 +90,17 @@ export class CreateCheckOutUseCase<
             endDate
         } = valueObject
 
-        const responseConsumption = this.getConsumptionUseCase.execute({ consumptionId: command.consumptionId })
+        const getConsumption = new GetConsumptionUseCase(this.checkOutService, this.consumptionObtainedEventPublisher)
 
-        const responseInvoice = this.getInvoiceUseCase.execute({ invoiceId: command.invoiceId })
+        const getInvoice = new GetInvoiceUseCase(this.checkOutService, this.invoiceObtainedEventPublisher)
+
+        const responseConsumption = getConsumption.execute({ consumptionId: command.consumptionId })
+
+        const responseInvoice = getInvoice.execute({ invoiceId: command.invoiceId })
 
         return new CheckOutDomainEntity({
             recepsionistName: recepsionistName.valueOf(),
-            endDate: endDate,
+            endDate: new Date,
             consumption: (await responseConsumption).data,
             invoice: (await responseInvoice).data,
         })

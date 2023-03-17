@@ -11,7 +11,8 @@ import {
     IConsumptionDomainEntity,
     IConsumptionDomainService,
     IExtraUpdatedResponse,
-    IUpdateExtra
+    IUpdateExtra,
+    IdValueObject
 } from "../../../../../domain";
 
 export class UpdateExtraUseCase<
@@ -48,9 +49,11 @@ export class UpdateExtraUseCase<
 
     private createValueObject(command: Command): IConsumptionDomainEntity {
         const extra = new ExtraValueObject(command.extra);
+        const consumptionId = new IdValueObject(command.consumptionId)
 
         return {
             extra,
+            consumptionId
         }
     }
 

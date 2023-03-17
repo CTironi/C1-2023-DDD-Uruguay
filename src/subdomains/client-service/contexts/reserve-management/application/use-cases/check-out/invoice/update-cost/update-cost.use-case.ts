@@ -11,6 +11,7 @@ import {
     IInvoiceDomainEntity,
     IInvoiceDomainService,
     IUpdateCost,
+    IdValueObject,
     InvoiceDomainEntity
 } from "../../../../../domain";
 
@@ -48,9 +49,11 @@ export class UpdateCostUseCase<
 
     private createValueObject(command: Command): IInvoiceDomainEntity {
         const cost = new CostValueObject(command.cost);
+        const invoiceId = new IdValueObject(command.invoiceId)
 
         return {
             cost,
+            invoiceId
         }
     }
 

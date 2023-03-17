@@ -10,6 +10,7 @@ import {
     IConsumptionDomainService,
     IMiniBarUpdatedResponse,
     IUpdateMiniBar,
+    IdValueObject,
     MiniBarUpdatedEventPublisher,
     MiniBarValueObject
 } from "../../../../../domain";
@@ -48,9 +49,11 @@ export class UpdateMiniBarUseCase<
 
     private createValueObject(command: Command): IConsumptionDomainEntity {
         const miniBar = new MiniBarValueObject(command.miniBar);
+        const consumptionId = new IdValueObject(command.consumptionId)
 
         return {
             miniBar,
+            consumptionId
         }
     }
 

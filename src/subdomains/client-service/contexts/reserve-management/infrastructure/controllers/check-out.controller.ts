@@ -88,12 +88,15 @@ export class CheckOutController {
         const useCase = new CreateCheckOutUseCase(
             this.checkOutService,
             this.checkOutCreatedMessagePublisher,
+            this.invoiceObtainedMessagePublisher,
+            this.consumptionObatinedMessagePublisher,
+            
         );
         return await useCase.execute(command);
     }
 
     @ApiOperation({summary: "update MiniBar"})
-    @Put('/updateMiniBar')
+    @Post('/updateMiniBar')
     async updateMiniBar(@Body() command: UpdateMiniBarCommand) {
         const useCase = new UpdateMiniBarUseCase(
             this.consumptionService,
@@ -103,7 +106,7 @@ export class CheckOutController {
     }
 
     @ApiOperation({summary: "update Extra"})
-    @Put('/updateExtra')
+    @Post('/updateExtra')
     async updateExtra(@Body() command: UpdateExtraCommand) {
         const useCase = new UpdateExtraUseCase(
             this.consumptionService,
@@ -113,7 +116,7 @@ export class CheckOutController {
     }
 
     @ApiOperation({summary: "update Cost"})
-    @Put('/updateCost')
+    @Post('/updateCost')
     async updateCost(@Body() command: UpdateCostCommand) {
         const useCase = new UpdateCostUseCase(
             this.invoiceService,
@@ -126,7 +129,7 @@ export class CheckOutController {
     @Get('/getConsumption')
     async getConsumption(@Body() command: GetConsumptionCommand) {
         const useCase = new GetConsumptionUseCase(
-            this.consumptionService,
+            this.checkOutService,
             this.consumptionObatinedMessagePublisher,
         );
         return await useCase.execute(command);
@@ -136,7 +139,7 @@ export class CheckOutController {
     @Get('/getInvoice')
     async getInvoice(@Body() command: GetInvoiceCommand) {
         const useCase = new GetInvoiceUseCase(
-            this.invoiceService,
+            this.checkOutService,
             this.invoiceObtainedMessagePublisher,
         );
         return await useCase.execute(command);

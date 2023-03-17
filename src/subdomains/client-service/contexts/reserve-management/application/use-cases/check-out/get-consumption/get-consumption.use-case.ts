@@ -5,7 +5,7 @@ import {
 import {
     ConsumptionDomainEntity,
     ConsumptionObtainedEventPublisher,
-    IConsumptionDomainService,
+    ICheckOutDomainService,
     IConsumptionObtainedResponse,
     IGetConsumption,
     CheckOutAggregate
@@ -23,12 +23,12 @@ export class GetConsumptionUseCase<
     private readonly checkOutAggregate: CheckOutAggregate;
 
     constructor(
-        private readonly consumptionService: IConsumptionDomainService,
+        private readonly checkOutService: ICheckOutDomainService,
         private readonly consumptionObtainedEventPublisher: ConsumptionObtainedEventPublisher,
     ) {
         super();
         this.checkOutAggregate = new CheckOutAggregate({
-            consumptionService,
+            checkOutService,
             consumptionObtainedEventPublisher,
         })
     }

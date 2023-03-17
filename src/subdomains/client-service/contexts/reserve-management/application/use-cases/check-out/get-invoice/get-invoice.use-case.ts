@@ -4,7 +4,7 @@ import {
 } from "src/libs/sofka";
 import {
     IGetInvoice,
-    IInvoiceDomainService,
+    ICheckOutDomainService,
     IInvoiceObtainedResponse,
     CheckOutAggregate,
     InvoiceDomainEntity,
@@ -22,12 +22,12 @@ export class GetInvoiceUseCase<
     private readonly checkOutAggregate: CheckOutAggregate;
 
     constructor(
-        private readonly invoiceService: IInvoiceDomainService,
+        private readonly checkOutService: ICheckOutDomainService,
         private readonly invoiceObtainedEventPublisher: InvoiceObtainedEventPublisher,
     ) {
         super();
         this.checkOutAggregate = new CheckOutAggregate({
-            invoiceService,
+            checkOutService,
             invoiceObtainedEventPublisher,
         })
     }
