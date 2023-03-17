@@ -40,7 +40,9 @@ import {
     UpdateEmailUseCase,
     UpdatePhoneUseCase
 } from "../../application/use-cases";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('check-in')
 @Controller('check-in')
 export class CheckInController {
 
@@ -60,6 +62,7 @@ export class CheckInController {
     ) { }
 
 
+    @ApiOperation({summary: "add Guest"})
     @Post('/addGuest')
     async addGuest(@Body() command: AddGuestCommand) {
         const useCase = new AddGuestUseCase(
@@ -69,6 +72,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "add RoomKey"})
     @Post('/addRoomKey')
     async addRoomKey(@Body() command: AddRoomKeyCommand) {
         const useCase = new AddRoomKeyUseCase(
@@ -78,6 +82,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "create CheckIn"})
     @Post('/createCheckIn')
     async createCheckIn(@Body() command: CreateCheckInCommand) {
         const useCase = new CreateCheckInUseCase(
@@ -89,6 +94,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update Phone"})
     @Post('/updatePhone')
     async updatePhone(@Body() command: UpdatePhoneCommand) {
         const useCase = new UpdatePhoneUseCase(
@@ -98,6 +104,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update Email"})
     @Post('/updateEmail')
     async updateEmail(@Body() command: UpdateEmailCommand) {
         const useCase = new UpdateEmailUseCase(
@@ -107,6 +114,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update AccessLevel"})
     @Post('/updateAccessLevel')
     async updateAccessLevel(@Body() command: UpdateAccessLevelCommand) {
         const useCase = new UpdateAccessLevelUseCase(
@@ -116,6 +124,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "get Guest"})
     @Get('/getGuest')
     async getGuest(@Body() command: GetGuestCommand) {
         const useCase = new GetGuestUseCase(
@@ -125,6 +134,7 @@ export class CheckInController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "get RoomKey"})
     @Get('/getRoomKey')
     async getRoomKey(@Body() command: GetRoomKeyCommand) {
         const useCase = new GetRoomKeyUseCase(

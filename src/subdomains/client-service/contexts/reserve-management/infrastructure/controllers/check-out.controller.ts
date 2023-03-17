@@ -40,7 +40,9 @@ import {
     UpdateExtraUseCase,
     UpdateMiniBarUseCase
 } from "../../application/use-cases";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('check-out')
 @Controller('check-out')
 export class CheckOutController {
 
@@ -60,6 +62,7 @@ export class CheckOutController {
     ) { }
 
 
+    @ApiOperation({summary: "add Consumption"})
     @Post('/addConsumption')
     async addConsumption(@Body() command: AddConsumptionCommand) {
         const useCase = new AddConsumptionUseCase(
@@ -69,6 +72,7 @@ export class CheckOutController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "add Invoice"})
     @Post('/addInvoice')
     async addInvoice(@Body() command: AddInvoiceCommand) {
         const useCase = new AddInvoiceUseCase(
@@ -78,6 +82,7 @@ export class CheckOutController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "create CheckOut"})
     @Post('/createCheckOut')
     async createCheckOut(@Body() command: CreateCheckOutCommand) {
         const useCase = new CreateCheckOutUseCase(
@@ -87,6 +92,7 @@ export class CheckOutController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update MiniBar"})
     @Put('/updateMiniBar')
     async updateMiniBar(@Body() command: UpdateMiniBarCommand) {
         const useCase = new UpdateMiniBarUseCase(
@@ -96,6 +102,7 @@ export class CheckOutController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update Extra"})
     @Put('/updateExtra')
     async updateExtra(@Body() command: UpdateExtraCommand) {
         const useCase = new UpdateExtraUseCase(
@@ -105,6 +112,7 @@ export class CheckOutController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update Cost"})
     @Put('/updateCost')
     async updateCost(@Body() command: UpdateCostCommand) {
         const useCase = new UpdateCostUseCase(
@@ -114,6 +122,7 @@ export class CheckOutController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "get Consumption"})
     @Get('/getConsumption')
     async getConsumption(@Body() command: GetConsumptionCommand) {
         const useCase = new GetConsumptionUseCase(
@@ -123,6 +132,7 @@ export class CheckOutController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "get Invoice"})
     @Get('/getInvoice')
     async getInvoice(@Body() command: GetInvoiceCommand) {
         const useCase = new GetInvoiceUseCase(

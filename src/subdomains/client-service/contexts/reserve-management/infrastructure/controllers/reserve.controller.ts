@@ -46,7 +46,8 @@ import {
     UpdateStartDateUseCase,
     UpdateStateUseCase
 } from '../../application';
-
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+@ApiTags('reserve')
 @Controller('reserve')
 export class ReserveController {
 
@@ -67,7 +68,7 @@ export class ReserveController {
         private readonly roomObtainedMessagePublisher: RoomObtainedMessagePublisher,
     ) { }
 
-
+    @ApiOperation({summary: "add customer"})
     @Post('/addCustomer')
     async addCustomer(@Body() command: AddCustomerCommand) {
         const useCase = new AddCustomerUseCase(
@@ -77,6 +78,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "add Room"})
     @Post('/addRoom')
     async addRoom(@Body() command: AddRoomCommand) {
         const useCase = new AddRoomUseCase(
@@ -86,6 +88,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "create Reserve"})
     @Post('/createReserve')
     async createReserve(@Body() command: CreateReserveCommand) {
         const useCase = new CreateReserveUseCase(
@@ -97,6 +100,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update startDate"})
     @Post('/updateStartDate')
     async updateStartDate(@Body() command: UpdateStartDateCommand) {
         const useCase = new UpdateStartDateUseCase(
@@ -106,6 +110,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update EndDate"})
     @Post('/updateEndDate')
     async updateEndDate(@Body() command: UpdateEndDateCommand) {
         const useCase = new UpdateEndDateUseCase(
@@ -115,6 +120,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update NumberOfGuests"})
     @Post('/updateNumberOfGuests')
     async updateNumberOfGuests(@Body() command: UpdateNumberOfGuestsCommand) {
         const useCase = new UpdateNumbreOfGuestUseCase(
@@ -124,6 +130,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "aupdate paymentMethod"})
     @Post('/updatePaymentMethod')
     async updatePaymentMethod(@Body() command: UpdatePaymentMethodCommand) {
         const useCase = new UpdatePaymentMethodUseCase(
@@ -133,6 +140,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "update state"})
     @Post('/updateState')
     async updateState(@Body() command: UpdateStateCommand) {
         const useCase = new UpdateStateUseCase(
@@ -142,6 +150,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "get customer"})
     @Get('/getCustomer')
     async getCustomer(@Body() command: GetCustomerCommand) {
         const useCase = new GetCustomerUseCase(
@@ -151,6 +160,7 @@ export class ReserveController {
         return await useCase.execute(command);
     }
 
+    @ApiOperation({summary: "get room"})
     @Get('/getRoom')
     async getRoom(@Body() command: GetRoomCommand) {
         const useCase = new GetRoomUseCase(
